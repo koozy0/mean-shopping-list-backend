@@ -1,0 +1,21 @@
+{
+  "name": "mean-shopping-list",
+  "version": "1.0.0",
+  "description": "Shopping list built with MEAN stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Koo Zheng Yu",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.2"
+  }
+}

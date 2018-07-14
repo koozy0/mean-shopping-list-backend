@@ -8,28 +8,37 @@ const Item = require('../../models/Item');
 // @desc    Get all Items
 // @access  Public
 router.get('/', async (req, res) => {
-  const items = await Item.find().sort({ date: -1 });
-
-  res.json(items);
+  try {
+    const items = await Item.find().sort({ date: -1 });
+    res.json(items);
+  } catch (err) {
+    res.status(404).json({ success: false });
+  }
 });
 
 // @route   POST api/items/
 // @desc    Create an Item
 // @access  Public
 router.post('/', async (req, res) => {
-  const newItem = new Item({ name: req.body.name }).save();
-
-  res.json(newItem);
+  try {
+    const newItem = await new Item({ name: req.body.name }).save();
+    res.json(newItem);
+  } catch (err) {
+    res.status(404).json({ success: false });
+  }
 });
 
 // @route   DELETE api/items/:id
 // @desc    Delete an Item
 // @access  Public
 router.delete('/:id', async (req, res) => {
-  const item = await Item.findById(req.params.id);
-  const removed = await item.remove();
-
-  if (removed) res.json({ success: true });
+  try {
+    const item = await Item.findById(req.params.id);
+    const removed = await item.remove();
+    if (removed) res.json({ success: true });
+  } catch (err) {
+    res.status(404).json({ success: false });
+  }
 });
 
 module.exports = router;

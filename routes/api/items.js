@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
 // Item Model
 const Item = require('../../models/Item');
@@ -12,7 +11,7 @@ router.get('/', async (req, res) => {
     const items = await Item.find().sort({ date: -1 });
     res.json(items);
   } catch (err) {
-    res.status(404).json({ success: false });
+    res.sendStatus(500);
   }
 });
 
@@ -24,7 +23,7 @@ router.post('/', async (req, res) => {
     const newItem = await new Item({ name: req.body.name }).save();
     res.json(newItem);
   } catch (err) {
-    res.status(404).json({ success: false });
+    res.sendStatus(500);
   }
 });
 
@@ -37,7 +36,7 @@ router.delete('/:id', async (req, res) => {
     const removed = await item.remove();
     if (removed) res.json({ success: true });
   } catch (err) {
-    res.status(404).json({ success: false });
+    res.sendStatus(500);
   }
 });
 
